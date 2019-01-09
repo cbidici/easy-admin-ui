@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import history from "../../history";
 import { Layout, Menu } from "antd";
 import { fetchEntities } from "../../actions";
 const { SubMenu } = Menu;
@@ -12,7 +13,16 @@ class EntityMenu extends React.Component {
 
   renderEntites = category => {
     return category.entities.map((entity, index) => {
-      return <Menu.Item key={`${index}`}>{entity.name}</Menu.Item>;
+      return (
+        <Menu.Item
+          key={`${index}`}
+          onClick={() => {
+            history.push(`/entities/${entity.key}`);
+          }}
+        >
+          {entity.name}
+        </Menu.Item>
+      );
     });
   };
 
@@ -50,18 +60,21 @@ class EntityMenu extends React.Component {
 }
 
 const mapStateToProps = state => {
-  let entityTree = state.entities.reduce((entityTree, entity) => {
-    let existingCategory = entityTree.filter(
-      category => category.name === entity.name
-    );
+  let entityTree = Object.values(state.entities).reduce(
+    (entityTree, entity) => {
+      let existingCategory = entityTree.filter(
+        category => category.name === entity.name
+      );
 
-    if (existingCategory.length === 0) {
-      return [...entityTree, { name: entity.category, entities: [entity] }];
-    } else {
-      existingCategory.entities.push(entity);
-      return existingCategory;
-    }
-  }, []);
+      if (existingCategory.length === 0) {
+        return [...entityTree, { name: entity.category, entities: [entity] }];
+      } else {
+        existingCategory.entities.push(entity);
+        return existingCategory;
+      }
+    },
+    []
+  );
 
   return { entityTree: entityTree };
 };

@@ -18,6 +18,7 @@ const App = () => {
             <Route path="/" exact component={Main} />
             <Route path="/help" exact component={Help} />
             <Route path="/entities" exact component={Entities} />
+            <Route path="/entities/:key" exact component={Entities} />
           </Switch>
         </Router>
       </Layout>
