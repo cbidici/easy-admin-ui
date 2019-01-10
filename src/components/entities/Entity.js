@@ -11,7 +11,7 @@ class Entity extends React.Component {
 
   tableColumns = () => {
     return this.props.entity.attributes.map(attribute => {
-      return { dataIndex: attribute.identifier, title: attribute.name };
+      return { dataIndex: attribute.field, title: attribute.name };
     });
   };
 
