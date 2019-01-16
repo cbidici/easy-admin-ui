@@ -10,7 +10,7 @@ import history from "../history";
 
 const App = () => {
   return (
-    <Layout>
+    <Layout style={{ minHeight: "100vh" }}>
       <TopNavigation />
       <Layout>
         <Router history={history}>

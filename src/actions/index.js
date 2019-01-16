@@ -1,5 +1,10 @@
 import api from "../api";
-import { FETCH_ENTITIES, FETCH_ATTRIBUTES, FETCH_ENTITY_DATA } from "./types";
+import {
+  FETCH_ENTITIES,
+  FETCH_ATTRIBUTES,
+  FETCH_ENTITY_DATA,
+  DELETE_ENTITY_DATA
+} from "./types";
 
 export const fetchEntities = () => async dispatch => {
   const response = await api.get("/entities");
@@ -19,5 +24,20 @@ export const fetchEntityData = entityKey => async dispatch => {
   dispatch({
     type: FETCH_ENTITY_DATA,
     payload: { entityKey, data: response.data }
+  });
+};
+
+export const deleteEntityData = (identifiers, entityKey) => async dispatch => {
+  await api.delete(`/entities/${entityKey}/data/${identifiers}`);
+
+  const response = await api.get(`/entities/${entityKey}/data`);
+
+  dispatch({
+    type: DELETE_ENTITY_DATA,
+    payload: {
+      entityKey,
+      data: response.data,
+      deleted: { entityKey, identifiers }
+    }
   });
 };
