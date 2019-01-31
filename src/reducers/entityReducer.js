@@ -1,8 +1,7 @@
 import {
   FETCH_ENTITIES,
   FETCH_ATTRIBUTES,
-  FETCH_ENTITY_DATA,
-  DELETE_ENTITY_DATA
+  FETCH_ENTITY_DATA
 } from "../actions/types";
 
 export default (state = {}, action) => {
@@ -31,14 +30,14 @@ export default (state = {}, action) => {
           data: action.payload.data
         }
       };
-    case DELETE_ENTITY_DATA:
-      return {
-        ...state,
-        [action.payload.entityKey]: {
-          ...state[action.payload.entityKey],
-          data: action.payload.data
-        }
-      };
+    //    case DELETE_ENTITY_DATA:
+    //      return {
+    //        ...state,
+    //        [action.payload.entityKey]: {
+    //          ...state[action.payload.entityKey],
+    //          data: action.payload.data
+    //        }
+    //      };
     default:
       return state;
   }

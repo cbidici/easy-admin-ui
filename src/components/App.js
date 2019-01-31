@@ -6,6 +6,7 @@ import Main from "./Main";
 import Help from "./Help";
 import TopNavigation from "./TopNavigation";
 import Entities from "./entities/Entities";
+import DeleteEntityData from "./entities/DeleteEntityData";
 import history from "../history";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/help" exact component={Help} />
             <Route path="/entities" exact component={Entities} />
             <Route path="/entities/:key" exact component={Entities} />
+            <Route path="/entities/:key/delete" exact component={DeleteEntityData} />
           </Switch>
         </Router>
       </Layout>

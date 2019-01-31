@@ -1,9 +1,9 @@
 import api from "../api";
+import history from "../history";
 import {
   FETCH_ENTITIES,
   FETCH_ATTRIBUTES,
-  FETCH_ENTITY_DATA,
-  DELETE_ENTITY_DATA
+  FETCH_ENTITY_DATA
 } from "./types";
 
 export const fetchEntities = () => async dispatch => {
@@ -28,16 +28,19 @@ export const fetchEntityData = entityKey => async dispatch => {
 };
 
 export const deleteEntityData = (identifiers, entityKey) => async dispatch => {
-  await api.delete(`/entities/${entityKey}/data/${identifiers}`);
+  console.log(identifiers);
+  history.push(`/entities/${entityKey}/delete`);
 
-  const response = await api.get(`/entities/${entityKey}/data`);
-
-  dispatch({
-    type: DELETE_ENTITY_DATA,
-    payload: {
-      entityKey,
-      data: response.data,
-      deleted: { entityKey, identifiers }
-    }
-  });
+  //  await api.delete(`/entities/${entityKey}/data/${identifiers}`);
+  //
+  //  const response = await api.get(`/entities/${entityKey}/data`);
+  //
+  //  dispatch({
+  //    type: DELETE_ENTITY_DATA,
+  //    payload: {
+  //      entityKey,
+  //      data: response.data,
+  //      deleted: { entityKey, identifiers }
+  //    }
+  //  });
 };
